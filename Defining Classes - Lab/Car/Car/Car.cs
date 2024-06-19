@@ -126,7 +126,7 @@ namespace CarManufacturer
 
         public void Drive(double distance)
         {
-            double consumedFuel = distance * fuelConsumption;
+            double consumedFuel = (distance * fuelConsumption) / 100;
 
             if(fuelQuantity >= consumedFuel)
             {
