@@ -49,5 +49,9 @@ namespace DefiningClasses
                 age = value;
             }
         }
+        public override string ToString()
+        {
+            return $"{Name} {Age}";
+        }
     }
 }
