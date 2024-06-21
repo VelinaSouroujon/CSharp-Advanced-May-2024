@@ -12,7 +12,19 @@ namespace DefiningClasses
 
         public Family()
         {
-            people = new List<Person>();
+            People = new List<Person>();
+        }
+
+        public List<Person> People
+        {
+            get
+            {
+                return people;
+            }
+            set
+            {
+                people = value;
+            }
         }
 
         public void AddMember(Person member)
