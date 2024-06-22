@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace _9.PokemonTrainer
@@ -7,7 +8,7 @@ namespace _9.PokemonTrainer
     {
         static void Main(string[] args)
         {
-            List<Trainer> trainers = new List<Trainer>();
+            Dictionary<string, Trainer> trainers = new Dictionary<string, Trainer>();
 
             string input = "";
 
@@ -22,21 +23,18 @@ namespace _9.PokemonTrainer
 
                 Pokemon pokemon = new Pokemon(pokemonName, pokemonElement, pokemonHealth);
 
-                int trainerIndex = trainers.FindIndex(x => x.Name == trainerName);
-
-                if(trainerIndex == -1)
+                if(!trainers.ContainsKey(trainerName))
                 {
-                    trainers.Add(new Trainer(trainerName));
-                    trainerIndex = trainers.Count - 1;
+                    trainers.Add(trainerName, new Trainer(trainerName));
                 }
-                trainers[trainerIndex].Pokemons.Add(pokemon);
+                trainers[trainerName].Pokemons.Add(pokemon);
             }
 
             while ((input = Console.ReadLine()) != "End")
             {
                 string pokemonElement = input;
 
-                foreach(Trainer trainer in trainers)
+                foreach(var (name, trainer) in trainers)
                 {
                     if(trainer.Pokemons.Any(x => x.Element == pokemonElement))
                     {
@@ -52,7 +50,7 @@ namespace _9.PokemonTrainer
                 }
             }
 
-            foreach (Trainer trainer in trainers.OrderByDescending(x => x.NumberOfBadges))
+            foreach (var (name, trainer) in trainers.OrderByDescending(x => x.Value.NumberOfBadges))
             {
                 Console.WriteLine(trainer);
             }
