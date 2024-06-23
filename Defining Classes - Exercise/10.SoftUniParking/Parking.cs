@@ -8,19 +8,19 @@ namespace SoftUniParking
 {
     public class Parking
     {
-        private List<Car> cars;
+        private Dictionary<string, Car> cars;
         private int capacity;
 
         public Parking(int capacity)
         {
             this.capacity = capacity;
-            cars = new List<Car>();
+            cars = new Dictionary<string, Car>();
         }
         public int Count => cars.Count;
 
         public string AddCar(Car car)
         {
-            if (cars.Any(x => x.RegistrationNumber == car.RegistrationNumber))
+            if (cars.ContainsKey(car.RegistrationNumber))
             {
                 return "Car with that registration number, already exists!";
             }
@@ -28,27 +28,28 @@ namespace SoftUniParking
             {
                 return "Parking is full!";
             }
-            cars.Add(car);
+            cars.Add(car.RegistrationNumber, car);
             return $"Successfully added new car {car.Make} {car.RegistrationNumber}";
         }
         public string RemoveCar(string RegistrationNumber)
         {
-            int idxToRemove = cars.FindIndex(x => x.RegistrationNumber == RegistrationNumber);
-
-            if(idxToRemove == -1)
+            if(!cars.ContainsKey(RegistrationNumber))
             {
                 return $"Car with that registration number, doesn't exist!";
             }
-            cars.RemoveAt(idxToRemove);
+            cars.Remove(RegistrationNumber);
             return $"Successfully removed {RegistrationNumber}";
         }
         public Car GetCar(string RegistrationNumber)
         {
-            return cars.FirstOrDefault(x => x.RegistrationNumber == RegistrationNumber);
+            return cars[RegistrationNumber];
         }
         public void RemoveSetOfRegistrationNumber(List<string> RegistrationNumbers)
         {
-            cars.RemoveAll(x => RegistrationNumbers.Contains(x.RegistrationNumber));
+            foreach(string number in RegistrationNumbers)
+            {
+                cars.Remove(number);
+            }
         }
     }
 }
