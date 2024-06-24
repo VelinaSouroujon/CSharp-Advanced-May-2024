@@ -10,8 +10,8 @@ namespace GenericBox
 
             for (int i = 0; i < n; i++)
             {
-                string value = Console.ReadLine();
-                Box<string> box = new Box<string>(value);
+                int value = int.Parse(Console.ReadLine());
+                Box<int> box = new Box<int>(value);
                 Console.WriteLine(box);
             }
         }
