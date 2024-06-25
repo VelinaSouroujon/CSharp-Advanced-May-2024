@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 
 namespace GenericBox
 {
-    public class Box<T>
+    public class Box<T> where T : IComparable<T>
     {
         private T value;
 
         public Box(T value)
         {
             this.value = value;
+        }
+        public int CountElementsGreaterThanValue(List<T> list)
+        {
+            return list
+                .Count(x => x.CompareTo(value) == 1);
         }
 
         public override string ToString()
