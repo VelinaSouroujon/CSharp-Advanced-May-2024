@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace _01.CustomList
 {
-    public class CustomList
+    public class CustomList<T>
     {
         private const int InitialSize = 2;
 
-        private int[] items;
+        private T[] items;
         private int counter = 0;
 
         public CustomList()
         {
-            items = new int[InitialSize];
+            items = new T[InitialSize];
         }
 
         public int Count => counter;
 
-        public int this[int i]
+        public T this[int i]
         {
             get
             {
@@ -33,7 +33,7 @@ namespace _01.CustomList
                 items[i] = value;
             }
         }
-        public void Add(int value)
+        public void Add(T value)
         {
             if (counter == items.Length)
             {
@@ -42,11 +42,11 @@ namespace _01.CustomList
 
             items[counter++] = value;
         }
-        public int RemoveAt(int index)
+        public T RemoveAt(int index)
         {
             ValidateRange(index);
 
-            int removedValue = items[index];
+            T removedValue = items[index];
 
             for(int i = index; i < counter - 1; i++)
             {
@@ -57,7 +57,7 @@ namespace _01.CustomList
 
             if (items.Length / 2 >= counter)
             {
-                int[] tempArray = new int[counter];
+                T[] tempArray = new T[counter];
                 Array.Copy(items, tempArray, counter);
                 items = tempArray;
             }
@@ -75,7 +75,7 @@ namespace _01.CustomList
         {
             for(int i = 0; i < counter; i++)
             {
-                if(items[i] == value)
+                if(items[i].Equals(value))
                 {
                     return true;
                 }
@@ -88,12 +88,12 @@ namespace _01.CustomList
             ValidateRange(firstIndex);
             ValidateRange(secondIndex);
 
-            int tempValue = items[firstIndex];
+            T tempValue = items[firstIndex];
             items[firstIndex] = items[secondIndex];
             items[secondIndex] = tempValue;
         }
 
-        public void Insert(int index, int item)
+        public void Insert(int index, T item)
         {
             ValidateRange(index);
 
@@ -120,7 +120,7 @@ namespace _01.CustomList
         }
         private void Resize()
         {
-            int[] tempArray = new int[items.Length * 2];
+            T[] tempArray = new T[items.Length * 2];
             Array.Copy(items, tempArray, items.Length);
             items = tempArray;
         }
