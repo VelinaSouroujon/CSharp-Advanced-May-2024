@@ -6,19 +6,14 @@ using System.Threading.Tasks;
 
 namespace CustomDoublyLinkedList
 {
-    public class ListNode
+    public class ListNode<T>
     {
-        public ListNode(int value)
+        public ListNode(T value)
         {
             Value = value;
         }
-        public ListNode Previous { get; set; }
-        public ListNode Next { get; set; }
-        public int Value { get; set; }
-
-        public override string ToString()
-        {
-            return $"{Previous?.Value} <- {Value} -> {Next?.Value}";
-        }
+        public ListNode<T> Previous { get; set; }
+        public ListNode<T> Next { get; set; }
+        public T Value { get; set; }
     }
 }

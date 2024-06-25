@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace CustomDoublyLinkedList
 {
-    public class DoublyLinkedList
+    public class DoublyLinkedList<T>
     {
-        private ListNode head;
-        private ListNode tail;
+        private ListNode<T> head;
+        private ListNode<T> tail;
         private int count;
         public int Count => count;
 
-        public void AddFirst(int value)
+        public void AddFirst(T value)
         {
-            ListNode newHead = new ListNode(value);
+            ListNode<T> newHead = new ListNode<T>(value);
 
             if (head == null)
             {
@@ -32,9 +32,9 @@ namespace CustomDoublyLinkedList
 
             count++;
         }
-        public void AddLast(int value)
+        public void AddLast(T value)
         {
-            ListNode newTail = new ListNode(value);
+            ListNode<T> newTail = new ListNode<T>(value);
 
             if(tail == null)
             {
@@ -51,14 +51,14 @@ namespace CustomDoublyLinkedList
 
             count++;
         }
-        public int RemoveFirst()
+        public T RemoveFirst()
         {
             if (Count == 0)
             {
                 throw new InvalidOperationException("List is empty");
             }
 
-            int removedValue = head.Value;
+            T removedValue = head.Value;
 
             head = head.Next;
 
@@ -74,14 +74,14 @@ namespace CustomDoublyLinkedList
             count--;
             return removedValue;
         }
-        public int RemoveLast()
+        public T RemoveLast()
         {
             if(Count == 0)
             {
                 throw new InvalidOperationException("List is empty");
             }
 
-            int removedValue = tail.Value;
+            T removedValue = tail.Value;
 
             tail = tail.Previous;
 
@@ -97,9 +97,9 @@ namespace CustomDoublyLinkedList
             count--;
             return removedValue;
         }
-        public void ForEach(Action<int> action)
+        public void ForEach(Action<T> action)
         {
-            ListNode node = head;
+            ListNode<T> node = head;
 
             while (node != null)
             {
@@ -107,11 +107,11 @@ namespace CustomDoublyLinkedList
                 node = node.Next;
             }
         }
-        public int[] ToArray()
+        public T[] ToArray()
         {
-            int[] array = new int[count];
+            T[] array = new T[count];
 
-            ListNode node = head;
+            ListNode<T> node = head;
 
             int counter = 0;
 
@@ -124,9 +124,9 @@ namespace CustomDoublyLinkedList
             }
             return array;
         }
-        public void ForEachBackwards(Action<int> action)
+        public void ForEachBackwards(Action<T> action)
         {
-            ListNode node = tail;
+            ListNode<T> node = tail;
 
             while (node != null)
             {
@@ -134,13 +134,13 @@ namespace CustomDoublyLinkedList
                 node = node.Previous;
             }
         }
-        public ListNode Find(int value)
+        public ListNode<T> Find(T value)
         {
-            ListNode node = head;
+            ListNode<T> node = head;
 
             while(node != null)
             {
-                if(node.Value == value)
+                if(node.Value.Equals(value))
                 {
                     return node;
                 }
@@ -150,15 +150,15 @@ namespace CustomDoublyLinkedList
 
             return null;
         }
-        public void AddBefore(ListNode currentNode, int value)
+        public void AddBefore(ListNode<T> currentNode, T value)
         {
             if(currentNode == null)
             {
                 throw new InvalidOperationException("Cannot insert before unexisting node");
             }
 
-            ListNode newNode = new ListNode(value);
-            ListNode previousNode = currentNode.Previous;
+            ListNode<T> newNode = new ListNode<T>(value);
+            ListNode<T> previousNode = currentNode.Previous;
 
             newNode.Previous = previousNode;
             newNode.Next = currentNode;

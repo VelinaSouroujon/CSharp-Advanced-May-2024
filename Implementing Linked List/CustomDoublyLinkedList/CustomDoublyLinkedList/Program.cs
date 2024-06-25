@@ -6,7 +6,7 @@ namespace CustomDoublyLinkedList
     {
         static void Main()
         {
-            DoublyLinkedList list = new DoublyLinkedList();
+            DoublyLinkedList<int> list = new DoublyLinkedList<int>();
 
             list.AddFirst(3);
             list.AddFirst(2);
@@ -15,7 +15,7 @@ namespace CustomDoublyLinkedList
             list.AddLast(5);
             list.AddLast(6);
 
-            ListNode node = list.Find(4);
+            ListNode<int> node = list.Find(4);
             list.AddBefore(node, 100);
 
             list.ForEach(n => Console.WriteLine(n));
