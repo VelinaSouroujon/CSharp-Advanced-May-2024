@@ -6,24 +6,24 @@ using System.Threading.Tasks;
 
 namespace _02.CustomStack
 {
-    public class CustomStack
+    public class CustomStack<T>
     {
         private const int Capacity = 4;
 
-        private int[] items;
+        private T[] items;
         private int counter;
 
         public CustomStack()
         {
-            items = new int[Capacity];
+            items = new T[Capacity];
         }
 
         public int Count => counter;
-        public void Push(int value)
+        public void Push(T value)
         {
             if(counter == items.Length)
             {
-                int[] tempArray = new int[items.Length * 2];
+                T[] tempArray = new T[items.Length * 2];
                 Array.Copy(items, tempArray, items.Length);
                 items = tempArray;
             }
@@ -31,21 +31,21 @@ namespace _02.CustomStack
             items[counter++] = value;
         }
 
-        public int Pop()
+        public T Pop()
         {
             if(counter == 0)
             {
                 throw new InvalidOperationException();
             }
 
-            int removedElement = items[counter - 1];
+            T removedElement = items[counter - 1];
             items[counter - 1] = default;
 
             counter--;
 
             if(items.Length / 2 >= counter)
             {
-                int[] tempArray = new int[items.Length / 2];
+                T[] tempArray = new T[items.Length / 2];
                 Array.Copy(items, tempArray, tempArray.Length);
                 items = tempArray;
             }
@@ -53,7 +53,7 @@ namespace _02.CustomStack
             return removedElement;
         }
 
-        public int Peek()
+        public T Peek()
         {
             if (counter == 0)
             {
@@ -63,7 +63,7 @@ namespace _02.CustomStack
             return items[counter - 1];
         }
 
-        public void ForEach(Action<int> action)
+        public void ForEach(Action<T> action)
         {
             for(int i = counter - 1; i >= 0; i--)
             {

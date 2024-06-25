@@ -6,7 +6,7 @@ namespace _02.CustomStack
     {
         static void Main(string[] args)
         {
-            CustomStack stack = new CustomStack();
+            CustomStack<int> stack = new CustomStack<int>();
 
             stack.Push(10);
             stack.Push(20);
