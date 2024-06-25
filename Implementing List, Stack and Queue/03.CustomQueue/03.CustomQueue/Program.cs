@@ -6,7 +6,7 @@ namespace _03.CustomQueue
     {
         static void Main(string[] args)
         {
-            CustomQueue queue = new CustomQueue();
+            CustomQueue<int> queue = new CustomQueue<int>();
 
             queue.Enqueue(10);
             queue.Enqueue(20);

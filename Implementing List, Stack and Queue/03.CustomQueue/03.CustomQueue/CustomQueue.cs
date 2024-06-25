@@ -6,42 +6,42 @@ using System.Threading.Tasks;
 
 namespace _03.CustomQueue
 {
-    public class CustomQueue
+    public class CustomQueue<T>
     {
         private const int Capacity = 4;
 
-        private int[] items;
+        private T[] items;
         private int counter;
 
         public CustomQueue()
         {
-            items = new int[Capacity];
+            items = new T[Capacity];
         }
-        public CustomQueue(params int[] items)
+        public CustomQueue(params T[] items)
         {
             this.items = items;
         }
 
         public int Count => counter;
-        public void Enqueue(int value)
+        public void Enqueue(T value)
         {
             if(counter == items.Length)
             {
-                int[] tempArray = new int[items.Length * 2];
+                T[] tempArray = new T[items.Length * 2];
                 Array.Copy(items, tempArray, items.Length);
                 items = tempArray;
             }
 
             items[counter++] = value;
         }
-        public int Dequeue()
+        public T Dequeue()
         {
             if(counter == 0)
             {
                 throw new InvalidOperationException();
             }
 
-            int removedElement = items[0];
+            T removedElement = items[0];
 
             counter--;
 
@@ -52,7 +52,7 @@ namespace _03.CustomQueue
 
             if(items.Length / 2 >= counter)
             {
-                int[] tempArray = new int[items.Length / 2];
+                T[] tempArray = new T[items.Length / 2];
                 Array.Copy(items, tempArray, tempArray.Length);
                 items = tempArray;
             }
@@ -65,7 +65,7 @@ namespace _03.CustomQueue
             return removedElement;
         }
 
-        public int Peek()
+        public T Peek()
         {
             if (counter == 0)
             {
@@ -78,10 +78,10 @@ namespace _03.CustomQueue
         public void Clear()
         {
             counter = 0;
-            items = new int[Capacity];
+            items = new T[Capacity];
         }
 
-        public void ForEach(Action<int> action)
+        public void ForEach(Action<T> action)
         {
             for (int i = 0; i < counter; i++)
             {
