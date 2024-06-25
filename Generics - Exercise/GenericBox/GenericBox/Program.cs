@@ -7,16 +7,16 @@ namespace GenericBox
     {
         static void Main(string[] args)
         {
-            List<string> list = new List<string>();
+            List<double> list = new List<double>();
             int n = int.Parse(Console.ReadLine());
 
             for (int i = 0; i < n; i++)
             {
-                string element = Console.ReadLine();
+                double element = double.Parse(Console.ReadLine());
                 list.Add(element);
             }
-            string value = Console.ReadLine();
-            Box<string> box = new Box<string>(value);
+            double value = double.Parse(Console.ReadLine());
+            Box<double> box = new Box<double>(value);
 
             Console.WriteLine(box.CountElementsGreaterThanValue(list));
         }
