@@ -13,7 +13,7 @@ namespace IteratorsAndComparators
 
         public Library(params Book[] books)
         {
-            this.books = books.ToList();
+            this.books = books.OrderBy(x => x).ToList();
         }
         public IEnumerator<Book> GetEnumerator()
         {
