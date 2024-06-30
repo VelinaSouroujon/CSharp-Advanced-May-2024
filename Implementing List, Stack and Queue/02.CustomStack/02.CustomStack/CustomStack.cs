@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace _02.CustomStack
 {
-    public class CustomStack<T>
+    public class CustomStack<T> : IEnumerable<T>
     {
         private const int Capacity = 4;
 
@@ -35,7 +36,7 @@ namespace _02.CustomStack
         {
             if(counter == 0)
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("No elements");
             }
 
             T removedElement = items[counter - 1];
@@ -69,6 +70,19 @@ namespace _02.CustomStack
             {
                 action(items[i]);
             }
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            for(int i = Count - 1; i >= 0; i--)
+            {
+                yield return items[i];
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
