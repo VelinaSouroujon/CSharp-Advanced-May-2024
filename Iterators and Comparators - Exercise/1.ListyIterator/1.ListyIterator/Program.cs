@@ -28,6 +28,10 @@ namespace _1.ListyIterator
                         case "hasnext":
                             Console.WriteLine(iterator.HasNext());
                             break;
+
+                        case "printall":
+                            Console.WriteLine(string.Join(" ", iterator));
+                            break;
                     }
                 }
                 catch (Exception ex)
