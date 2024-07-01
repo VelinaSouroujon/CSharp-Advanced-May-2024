@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace _03.CustomQueue
 {
-    public class CustomQueue<T>
+    public class CustomQueue<T> : IEnumerable<T>
     {
         private const int Capacity = 4;
 
@@ -87,6 +88,19 @@ namespace _03.CustomQueue
             {
                 action(items[i]);
             }
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            for (int i = 0; i < counter; i++)
+            {
+                yield return items[i];
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
